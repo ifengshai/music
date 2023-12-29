@@ -1,0 +1,1 @@
+import{t as e}from"./data-EEtByK52.js";import{d as n,r,o as p,k as s,h as a}from"./index-2S-pRSzX.js";const u=n({__name:"fixHeader",setup(c){const o=[{label:"日期",prop:"date"},{label:"姓名",prop:"name"},{label:"地址",prop:"address"}];return(l,_)=>{const t=r("pure-table");return p(),s(t,{data:a(e).concat(a(e)).concat(a(e)),columns:o,height:"360"},null,8,["data"])}}});export{u as _};

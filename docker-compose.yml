@@ -1,0 +1,47 @@
+version: "3"
+services:
+### nginx ##################################
+  music-nginx:
+    image: nginx:latest
+    container_name: music-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./client/dist:/www/html:rw
+      - ./nginx/conf.d:/etc/nginx/conf.d/:rw
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: always
+    networks:
+      - default
+### mysql80 ##################################
+  music-mysql:
+    image: mysql:8.0.13
+    container_name: music-mysql
+    command: --default-authentication-plugin=mysql_native_password #解决外部无法访问
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./mysql/data:/var/lib/mysql/:rw
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: "music888888"
+### mysql80 ##################################
+  music-server:
+    build:
+      context: ./server
+    container_name: music-server
+    ports:
+      - "888:888"
+    volumes:
+      - ./server:/music_server/:rw
+    privileged: true
+    #command: chmod 777 /music_server/main
+    command: /music_server/main -f /music_server/etc/colly-api.yaml
+    restart: always
+    networks:
+      - default

@@ -1,0 +1,52 @@
+Name: colly-api
+Host: 0.0.0.0
+Port: 888
+Timeout: 60000
+
+#数据库
+DB:
+  DataSource: root:music888888@tcp(music-mysql:3306)/go_zero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6980-4666-8e13-5a19ed505da0
+  AccessExpire: 31536000
+
+ChromePath: 
+#服务监控
+#DevServer:
+#  Enabled: true
+#  Port: 8887
+#  HealthPath: "/ping"
+
+#缓存
+#Cache:
+#  - Host: 192.168.56.80:6379
+#    Pass:
+
+#日志
+LogX:
+  ServiceName: colly-log
+  Mode: file
+  #debug,info,error,severe
+  Level: debug
+
+  TimeFormat: 2006-01-02 15:04:05.000
+  Stat: false
+  #日志路径
+  Path: /music_server/temp/log
+  #压缩日志
+  Compress: false
+  #文件分割模式， daily 按日期 size 按大小
+  Rotation: daily
+  #最多文件保留个数
+  MaxBackups: 3
+#  #文件输出模式，按照大小分割时，单个文件大小 当前被写入的日志文件最大可占用多少空间。0代表没有上限。单位为`MB`
+#  MaxSize: 1
+
+#链路追踪
+#Telemetry:
+#  Name: colly-api
+#  Endpoint: http://jaeger:14268/api/traces
+#  Sampler: 1.0
+#  Batcher: jaeger
