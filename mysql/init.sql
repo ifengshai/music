@@ -3,23 +3,23 @@ CREATE DATABASE go_zero;
 USE go_zero;
 
 DROP TABLE IF EXISTS `music`;
-CREATE TABLE `music`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户表id',
+CREATE TABLE `music` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户表id',
   `music_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '音乐图片',
   `music_artist` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '音乐的演唱者',
   `music_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '音乐名称',
   `music_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '音乐播放源地址',
-  `music_lyric` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '音乐歌词地址',
-  `is_love` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否是喜欢的音乐，0：不是，1：是，',
-  `create_timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
-  `update_timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
-  `delete_timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '删除时间',
+  `music_lyric` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '音乐歌词地址',
+  `is_love` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否是喜欢的音乐，0：不是，1：是，',
+  `extend` text COLLATE utf8mb4_unicode_ci COMMENT '扩展字段',
+  `create_timestamp` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_timestamp` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `delete_timestamp` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_token`(`user_id` ASC) USING BTREE,
-  INDEX `idx_token_love`(`user_id` ASC, `is_love` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '音乐记录' ROW_FORMAT = Dynamic;
-
+  KEY `idx_token` (`user_id`) USING BTREE,
+  KEY `idx_token_love` (`user_id`,`is_love`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='音乐记录';
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
